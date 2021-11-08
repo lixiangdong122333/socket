@@ -54,8 +54,18 @@ public class Server {
                 InputStream is=socket.getInputStream();
                 InputStreamReader ir=new InputStreamReader(is);
                 BufferedReader bf=new BufferedReader(ir);
-                while (true)
-                    System.out.println(bf.readLine());
+
+                OutputStream os=socket.getOutputStream();
+                OutputStreamWriter ow=new OutputStreamWriter(os,"utf-8");
+                BufferedWriter bw=new BufferedWriter(ow);
+                PrintWriter pw=new PrintWriter(bw,true);
+
+                String message;
+                while ((message=bf.readLine())!=null){
+                    System.out.println(message);
+                    //回传
+                    pw.println(message);
+                }
             } catch (IOException e) {
                 System.out.println(socket.getInetAddress()+"已断开");
             }

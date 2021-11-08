@@ -36,12 +36,19 @@ public class Client {
             OutputStreamWriter ow=new OutputStreamWriter(os,"utf-8");
             BufferedWriter bw=new BufferedWriter(ow);
             PrintWriter pw=new PrintWriter(bw,true);
+
+            InputStream is=socket.getInputStream();
+            InputStreamReader ir=new InputStreamReader(is);
+            BufferedReader bf=new BufferedReader(ir);
+
+
             Scanner scanner=new Scanner(System.in);
             for (;;){
                 String date=scanner.nextLine();
                 if (date.equals("exit"))
                     break;
                 pw.println(date);
+                System.out.println(bf.readLine());
             }
 
         }catch (IOException e){
